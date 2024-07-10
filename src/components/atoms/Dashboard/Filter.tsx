@@ -1,6 +1,4 @@
-// FilterCategories.tsx
-
-import React,{useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import data,{Category} from '@/constant/data';
 import FilterMenu from '@/components/molecules/FilterMenu';
 import ButtonFilter from './ButtonFilter';
@@ -10,20 +8,20 @@ const FilterCategories=({onFilter}: {onFilter: (filteredCategories: Category[]) 
     const [isOpen,setIsOpen]=useState(false);
     const [selectedCategories,setSelectedCategories]=useState<string[]>([]);
 
-    const toggleMenu: () => void=(): void => {
+    const toggleMenu=(): void => {
         setIsOpen(!isOpen);
     };
 
-    const handleCategoryChange: (category: string) => void=(category: string): void => {
-        setSelectedCategories((prevSelected: string[]): string[] =>
+    const handleCategoryChange=(category: string): void => {
+        setSelectedCategories((prevSelected) =>
             prevSelected.includes(category)
-                ? prevSelected.filter((cat: string): boolean => cat!==category)
+                ? prevSelected.filter((cat) => cat!==category)
                 :[...prevSelected,category]
         );
     };
 
-    useEffect((): void => {
-        const filteredCategories: Category[]=categories.filter((category: Category): boolean =>
+    useEffect(() => {
+        const filteredCategories=categories.filter((category) =>
             selectedCategories.length===0||selectedCategories.includes(category.name)
         );
         onFilter(filteredCategories);
@@ -31,7 +29,7 @@ const FilterCategories=({onFilter}: {onFilter: (filteredCategories: Category[]) 
 
     return (
         <div>
-            <ButtonFilter onClick={toggleMenu} />
+            <ButtonFilter onClick={toggleMenu} isOpen={isOpen} />
             {isOpen&&(
                 <div>
                     <FilterMenu
@@ -46,3 +44,5 @@ const FilterCategories=({onFilter}: {onFilter: (filteredCategories: Category[]) 
 };
 
 export default FilterCategories;
+
+
