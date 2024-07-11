@@ -8,7 +8,7 @@ const IconBurger=({onClick,productCount}: {onClick: () => void; productCount: nu
                 <GiHamburger className="mr-2 w-6 h-6 text-yellow" />
             </button>
             {productCount>0&&(
-                <span className="absolute top-2 right-4 bg-green rounded-full w-4 h-4 text-xs flex items-center justify-center text-black">
+                <span className="absolute top-2 right-4  bg-green rounded-full w-4 h-4 text-xs flex items-center justify-center text-black font-bold">
                     {productCount}
                 </span>
             )}

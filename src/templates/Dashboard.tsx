@@ -1,44 +1,38 @@
-"use client"
+"use client";
+
 import React,{useState} from 'react';
 import Menu from '@/components/organisms/Menu';
 import data,{Category,Product} from '@/constant/data';
 import InputFilter from '@/components/atoms/Dashboard/InputFilter';
 import FilterCategories from '@/components/atoms/Dashboard/Filter';
+import {useCart} from '@/hooks/useCart';
 
 const Dashboard=() => {
     const {categories}=data;
     const [searchTerm,setSearchTerm]=useState('');
     const [filteredCategories,setFilteredCategories]=useState<Category[]>(categories);
+    const {addToCart}=useCart();
 
-    // Función para agregar productos al carrito (ejemplo básico)
-    const addToCart: (product: Product) => void=(product: Product): void => {
-        console.log(`Agregado al carrito: ${product.title}`);
-        // Aquí puedes implementar la lógica para agregar productos al carrito
-    };
-
-    // Función para manejar el cambio en el término de búsqueda
-    const handleSearch: (term: string) => void=(term: string): void => {
+    const handleSearch=(term: string) => {
         setSearchTerm(term);
     };
 
-    // Filtrar productos según el término de búsqueda
-    const displayedCategories: {products: Product[]; id: number,name: string}[]=filteredCategories.map((category: Category) => ({
+    const displayedCategories=filteredCategories.map(category => ({
         ...category,
-        products: category.products.filter((product: Product): boolean =>
+        products: category.products.filter(product =>
             product.title.toLowerCase().includes(searchTerm.toLowerCase())
         ),
     }));
 
     return (
-        <section className="flex flex-col justify-center items-center mt-12">
-
+        <section className="flex flex-col justify-center items-center mt-20 w-screen">
             <div className='flex flex-row justify-between items-center gap-8'>
                 <InputFilter onSearch={handleSearch} />
                 <FilterCategories onFilter={setFilteredCategories} />
             </div>
             <div>
-                {displayedCategories.map((category: Category) => (
-                    <Menu key={category.id} products={category.products} />
+                {displayedCategories.map((category) => (
+                    <Menu key={category.id} products={category.products} addToCart={addToCart} />
                 ))}
             </div>
         </section>

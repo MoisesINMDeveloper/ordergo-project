@@ -1,27 +1,22 @@
 import React from 'react';
-import {Product} from '@/constant/data'; // Importa la interfaz Product desde tus datos
+import {Product} from '@/constant/data';
 import ProductDetail from '../molecules/ProductDetail';
 
+interface MenuProps {
+    products: Product[];
+    addToCart: (product: Product) => void;
+}
 
-
-const Menu=({products}: {products: Product[]}) => {
-    const addToCart: (product: Product) => void=(product: Product): void => {
-        // Función para agregar productos al carrito (puedes implementar la lógica aquí)
-        console.log(`Agregado al carrito: ${product.title}`);
-    };
-
+const Menu=({products,addToCart}: MenuProps) => {
     return (
-        <div>
-
-            <div className=" my-8">
-                {products.map((product: Product) => (
-                    <ProductDetail
-                        key={product.id}
-                        product={product}
-                        onAddToCart={(): void => addToCart(product)}
-                    />
-                ))}
-            </div>
+        <div className="my-8">
+            {products.map((product) => (
+                <ProductDetail
+                    key={product.id}
+                    product={product}
+                    onAddToCart={() => addToCart(product)}
+                />
+            ))}
         </div>
     );
 };

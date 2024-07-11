@@ -4,7 +4,7 @@ import React,{useState} from 'react';
 import {IoMdMenu,IoMdClose} from 'react-icons/io';
 import ItemsMenu from './ItemsMenu';
 
-const MenuNavbar=() => {
+const MenuNavbar=({onClick}: {onClick: () => void}) => {
     const [isMenuOpen,setIsMenuOpen]=useState(false);
 
     const handleNavbarMenuClick: () => void=(): void => {
@@ -12,7 +12,7 @@ const MenuNavbar=() => {
     };
 
     return (
-        <div>
+        <div className=' z-50'>
             <button className="w-auto h-auto mb-2" onClick={handleNavbarMenuClick}>
                 {isMenuOpen? (
                     <IoMdClose className="w-8 h-8 text-yellow transition-all duration-1000 transform rotate-190" />
@@ -28,6 +28,3 @@ const MenuNavbar=() => {
 };
 
 export default MenuNavbar;
-
-
-
