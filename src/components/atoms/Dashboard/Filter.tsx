@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react';
+import {useState,useEffect,useRef} from 'react';
 import data,{Category} from '@/constant/data';
 import FilterMenu from '@/components/molecules/FilterMenu';
 import ButtonFilter from './ButtonFilter';
@@ -7,6 +7,7 @@ const FilterCategories=({onFilter}: {onFilter: (filteredCategories: Category[]) 
     const {categories}=data;
     const [isOpen,setIsOpen]=useState(false);
     const [selectedCategories,setSelectedCategories]=useState<string[]>([]);
+    const menuRef=useRef<HTMLDivElement>(null);
 
     const toggleMenu=(): void => {
         setIsOpen(!isOpen);
@@ -27,8 +28,21 @@ const FilterCategories=({onFilter}: {onFilter: (filteredCategories: Category[]) 
         onFilter(filteredCategories);
     },[selectedCategories,categories,onFilter]);
 
+    useEffect(() => {
+        const handleClickOutside=(event: MouseEvent) => {
+            if(menuRef.current&&!menuRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown',handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown',handleClickOutside);
+        };
+    },[]);
+
     return (
-        <div>
+        <div ref={menuRef}>
             <ButtonFilter onClick={toggleMenu} isOpen={isOpen} />
             {isOpen&&(
                 <div>
@@ -44,5 +58,4 @@ const FilterCategories=({onFilter}: {onFilter: (filteredCategories: Category[]) 
 };
 
 export default FilterCategories;
-
 
