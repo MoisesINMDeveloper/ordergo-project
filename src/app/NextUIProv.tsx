@@ -1,9 +1,8 @@
-"use client";
-import {NextUIProvider} from "@nextui-org/react";
-export default function NextUIProv({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+import React from 'react';
+import {NextUIProvider} from '@nextui-org/react';
+
+const NextUIProv: React.FC<{children: React.ReactNode}>=({children}) => {
     return <NextUIProvider>{children}</NextUIProvider>;
 };
+
+export default NextUIProv;

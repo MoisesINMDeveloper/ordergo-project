@@ -24,7 +24,7 @@ interface CartContextType {
 
 const CartContext=createContext<CartContextType|undefined>(undefined);
 
-export const CartProvider: React.FC=({children}: any) => {
+export const CartProvider=({children}: any) => {
     const [cartItems,setCartItems]=useState<CartItem[]>([]);
 
     const addToCart=(product: Product) => {
