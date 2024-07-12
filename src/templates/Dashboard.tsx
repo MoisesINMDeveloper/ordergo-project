@@ -30,7 +30,7 @@ const Dashboard=() => {
                 <InputFilter onSearch={handleSearch} />
                 <FilterCategories onFilter={setFilteredCategories} />
             </div>
-            <div className='bg-black'>
+            <div className='bg-black w-screen'>
                 {displayedCategories.map((category: {products: Product[]; id: number; name: string;}) => (
                     <Menu key={category.id} products={category.products} addToCart={addToCart} />
                 ))}
