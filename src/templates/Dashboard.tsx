@@ -25,12 +25,12 @@ const Dashboard=() => {
     }));
 
     return (
-        <section className="flex flex-col justify-center items-center mt-20 ">
+        <section className="flex flex-col justify-center items-center pt-20 ">
             <div className='flex flex-row justify-between items-center gap-8'>
                 <InputFilter onSearch={handleSearch} />
                 <FilterCategories onFilter={setFilteredCategories} />
             </div>
-            <div>
+            <div className='bg-black'>
                 {displayedCategories.map((category: {products: Product[]; id: number; name: string;}) => (
                     <Menu key={category.id} products={category.products} addToCart={addToCart} />
                 ))}
