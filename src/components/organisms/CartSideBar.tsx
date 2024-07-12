@@ -6,10 +6,8 @@ import CartPaymentButton from '../atoms/Dashboard/CartPaymentButton';
 import CartTotalComponent from '../atoms/Dashboard/CartTotal';
 import OnCloseCart from '../atoms/Navbar/onCloseCart';
 import PaymentModal from '../modals/PaymentModal';
-import NotificationComponent from "../modals/Notification"
-import {join,parse} from 'path';
-import {title} from 'process';
-import {stringify} from 'querystring';
+import NotificationComponent from "../modals/Notification";
+
 const CartSidebar=({isOpen,onClose}: {isOpen: boolean; onClose: () => void;}) => {
     const {cartItems,updateQuantity,removeFromCart}=useCart();
     const sidebarRef=useRef<HTMLDivElement>(null);
@@ -44,7 +42,7 @@ const CartSidebar=({isOpen,onClose}: {isOpen: boolean; onClose: () => void;}) =>
         const orderSummary: string=cartItems.map(item => `${item.quantity} ${item.product.title}`).join(', ');
         const orderInfo={
             orderSummary,
-            total: `$${total}`,
+            monto: `$${total}`,  // Cambiado de total a monto
             comment
         };
         localStorage.setItem('cartInfo',JSON.stringify(orderInfo));
@@ -56,18 +54,16 @@ const CartSidebar=({isOpen,onClose}: {isOpen: boolean; onClose: () => void;}) =>
         setIsModalOpen(false);
         setIsNotificationVisible(true);
 
-        // Ocultar notificación después de 5 segundos
         setTimeout((): void => setIsNotificationVisible(false),5000);
 
-        // Esperar 5 segundos antes de abrir el enlace de WhatsApp
         setTimeout((): void => {
             const cartInfo: any=JSON.parse(localStorage.getItem('cartInfo')!);
             const phoneNumber="584124676968";
-            const message=`Hola, me gustaría realizar el pago del pedido.\n\nDetalles del pedido:\n${cartInfo.orderSummary}\nMonto: ${cartInfo.total}\nComentario: ${cartInfo.comment}\nReferencia: ${referenceNumber}`;
+            const message=`Hola, me gustaría realizar el pago del pedido.\n\nDetalles del pedido:\n${cartInfo.orderSummary}\nMonto: ${cartInfo.monto}\nComentario: ${cartInfo.comment}\nReferencia: ${referenceNumber}`;
             const whatsappLink=`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
             window.open(whatsappLink,'_blank');
-        },5000); // 5000 ms = 5 segundos
+        },5000);
     };
 
     return (
@@ -86,7 +82,7 @@ const CartSidebar=({isOpen,onClose}: {isOpen: boolean; onClose: () => void;}) =>
                     <CartPaymentButton onClick={handlePaymentClick} />
                 </div>
             </div>
-            {isModalOpen&&<PaymentModal total={total} onConfirm={handleConfirm} onClose={(): void => setIsModalOpen(true)} />}
+            {isModalOpen&&<PaymentModal total={total} onConfirm={handleConfirm} onClose={(): void => setIsModalOpen(false)} />}
             {isNotificationVisible&&<NotificationComponent />}
         </>
     );

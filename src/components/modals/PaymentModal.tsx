@@ -21,7 +21,7 @@ const PaymentModal: React.FC<PaymentModalProps>=({total,onConfirm,onClose}) => {
             Código: ${code}
             DNI: ${cedula}
             Teléfono: ${phone}
-            Total: $${total.toFixed(2)}
+            Monto: $${total.toFixed(2)}
         `;
         navigator.clipboard.writeText(textToCopy);
     };
@@ -37,7 +37,7 @@ const PaymentModal: React.FC<PaymentModalProps>=({total,onConfirm,onClose}) => {
                 <InfoRow label="Código" value={code} />
                 <InfoRow label="Cedula" value={cedula} />
                 <InfoRow label="Teléfono" value={phone} />
-                <InfoRow label="Total" value={`$${total.toFixed(2)}`} />
+                <InfoRow label="Monto" value={`$${total.toFixed(2)}`} />
                 <input
                     type="text"
                     value={referenceNumber}
