@@ -10,11 +10,11 @@ interface MenuProps {
 const Menu=({products,addToCart}: MenuProps) => {
     return (
         <div className="my-8">
-            {products.map((product) => (
+            {products.map((product: Product) => (
                 <ProductDetail
                     key={product.id}
                     product={product}
-                    onAddToCart={() => addToCart(product)}
+                    onAddToCart={(): void => addToCart(product)}
                 />
             ))}
         </div>

@@ -5,7 +5,7 @@ import Dashboard from '@/templates/Dashboard';
 
 const Home: React.FC=() => {
   return (
-    <main className="h-screen w-screen ">
+    <main className="h-screen ">
       <Navbar />
       <Dashboard />
     </main>

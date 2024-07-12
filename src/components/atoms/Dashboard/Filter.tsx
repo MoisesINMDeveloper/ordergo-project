@@ -9,34 +9,34 @@ const FilterCategories=({onFilter}: {onFilter: (filteredCategories: Category[]) 
     const [selectedCategories,setSelectedCategories]=useState<string[]>([]);
     const menuRef=useRef<HTMLDivElement>(null);
 
-    const toggleMenu=(): void => {
+    const toggleMenu: () => void=(): void => {
         setIsOpen(!isOpen);
     };
 
-    const handleCategoryChange=(category: string): void => {
-        setSelectedCategories((prevSelected) =>
+    const handleCategoryChange: (category: string) => void=(category: string): void => {
+        setSelectedCategories((prevSelected: string[]): string[] =>
             prevSelected.includes(category)
-                ? prevSelected.filter((cat) => cat!==category)
+                ? prevSelected.filter((cat: string): boolean => cat!==category)
                 :[...prevSelected,category]
         );
     };
 
-    useEffect(() => {
-        const filteredCategories=categories.filter((category) =>
+    useEffect((): void => {
+        const filteredCategories: Category[]=categories.filter((category: Category): boolean =>
             selectedCategories.length===0||selectedCategories.includes(category.name)
         );
         onFilter(filteredCategories);
     },[selectedCategories,categories,onFilter]);
 
-    useEffect(() => {
-        const handleClickOutside=(event: MouseEvent) => {
+    useEffect((): () => void => {
+        const handleClickOutside: (event: MouseEvent) => void=(event: MouseEvent): void => {
             if(menuRef.current&&!menuRef.current.contains(event.target as Node)) {
                 setIsOpen(false);
             }
         };
 
         document.addEventListener('mousedown',handleClickOutside);
-        return () => {
+        return (): void => {
             document.removeEventListener('mousedown',handleClickOutside);
         };
     },[]);

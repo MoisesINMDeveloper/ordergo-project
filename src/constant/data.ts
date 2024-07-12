@@ -1,7 +1,3 @@
-import type { title } from "process";
-
-// src/constant/data.ts
-
 export interface Product {
   id: number;
   title: string;
@@ -15,8 +11,13 @@ export interface Category {
   name: string;
   products: Product[];
 }
-
-const data: { categories: Category[] } = {
+export interface PayDates {
+  bank: string;
+  code: string;
+  cedula: string;
+  phone: string;
+}
+const data: { categories: Category[]; paydates: PayDates } = {
   categories: [
     {
       id: 1,
@@ -58,7 +59,7 @@ const data: { categories: Category[] } = {
           id: 1,
           title: "Pepito Carne",
           price: 7.99,
-          images: ["/PepitoFullEquipo.jfif", "PepitoPeligro.jfif"],
+          images: ["/PepitoFullEquipo.jfif", "/PepitoPeligro.jfif"],
           description:
             "Un tradicional pepito callejero de carne con: tomate, lechuga, papas cabello de angel, queso amarillo, cebolla, jamon, salsas al gusto.",
         },
@@ -84,6 +85,12 @@ const data: { categories: Category[] } = {
       products: [],
     },
   ],
+  paydates: {
+    bank: "Venezuela",
+    code: "0102",
+    cedula: "24685881",
+    phone: "04124676968",
+  },
 };
 
 export default data;

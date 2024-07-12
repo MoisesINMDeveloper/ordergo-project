@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState,type FormEvent} from 'react';
 
 
 
@@ -12,7 +12,7 @@ const InputFilter=({onSearch}: {onSearch: (searchTerm: string) => void;}) => {
     };
 
     return (
-        <form action="" onSubmit={(e) => e.preventDefault()}>
+        <form action="" onSubmit={(e: FormEvent<HTMLFormElement>): void => e.preventDefault()}>
             <input className='border-solid border-2 placeholder:text-gray-500 outline-none bg-transparent border-brown rounded-lg  h-10 w-56 text-sm text-gray-200 px-2'
                 type="text"
                 value={searchTerm}

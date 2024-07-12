@@ -3,8 +3,9 @@ import {Inter} from 'next/font/google';
 import './globals.css';
 import {CartProvider} from '@/hooks/useCart';
 import NextUIProv from './NextUIProv';
+import type {NextFont} from 'next/dist/compiled/@next/font';
 
-const inter=Inter({subsets: ['latin']});
+const inter: NextFont=Inter({subsets: ['latin']});
 
 export const metadata: Metadata={
   title: 'Create Next App',

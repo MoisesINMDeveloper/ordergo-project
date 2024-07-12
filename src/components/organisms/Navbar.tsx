@@ -11,24 +11,24 @@ const Navbar=() => {
     const [isCartOpen,setIsCartOpen]=useState(false);
     const {cartItems}=useCart();
 
-    const handleIconBurgerClick=() => {
+    const handleIconBurgerClick: () => void=(): void => {
         setIsCartOpen(!isCartOpen);
     };
 
-    const handleNavbarMenuClick=() => {
+    const handleNavbarMenuClick: () => void=(): void => {
         console.log('Abrir menú de navegación');
     };
 
     return (
         <div>
-            <div className="z-50 top-0 fixed h-10 flex  w-screen flex-row-reverse justify-between items-center px-4 pt-2 bg-brown box-shadow text-black text-lg">
+            <div className="z-50 top-0 fixed h-10 w-screen flex  flex-row-reverse justify-between items-center px-4 pt-2 bg-brown box-shadow text-black text-lg">
                 <div className="flex flex-row gap-2">
                     <TitleName title={"MOSTAZA"} />
                     <IconBurger onClick={handleIconBurgerClick} productCount={cartItems.length} />
                 </div>
                 <MenuNavbar onClick={handleNavbarMenuClick} />
             </div>
-            <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+            <CartSidebar isOpen={isCartOpen} onClose={(): void => setIsCartOpen(false)} />
         </div>
     );
 };
