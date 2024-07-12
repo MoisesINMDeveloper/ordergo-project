@@ -42,7 +42,7 @@ const CartSidebar=({isOpen,onClose}: {isOpen: boolean; onClose: () => void;}) =>
         const orderSummary: string=cartItems.map(item => `${item.quantity} ${item.product.title}`).join(', ');
         const orderInfo={
             orderSummary,
-            monto: `$${total}`,  // Cambiado de total a monto
+            monto: total.toFixed(2),  // Guardar el monto sin el símbolo de dólar
             comment
         };
         localStorage.setItem('cartInfo',JSON.stringify(orderInfo));
@@ -59,10 +59,11 @@ const CartSidebar=({isOpen,onClose}: {isOpen: boolean; onClose: () => void;}) =>
         setTimeout((): void => {
             const cartInfo: any=JSON.parse(localStorage.getItem('cartInfo')!);
             const phoneNumber="584124676968";
-            const message=`Hola, me gustaría realizar el pago del pedido.\n\nDetalles del pedido:\n${cartInfo.orderSummary}\nMonto: ${cartInfo.monto}\nComentario: ${cartInfo.comment}\nReferencia: ${referenceNumber}`;
+            const message=`Hola, me gustaría realizar el pago del pedido.\n\nDetalles del pedido:\n${cartInfo.orderSummary}\nMonto: $${parseFloat(cartInfo.monto).toFixed(2)}\nComentario: ${cartInfo.comment}\nReferencia: ${referenceNumber}`;
             const whatsappLink=`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
             window.open(whatsappLink,'_blank');
+            localStorage.removeItem('cartInfo');  // Borrar el pedido de localStorage
         },5000);
     };
 
