@@ -6,7 +6,7 @@ interface ActionButtonProps {
     color: string;
 }
 
-const ActionButton: React.FC<ActionButtonProps>=({onClick,label,color}) => (
+const ActionButton: React.FC<ActionButtonProps>=({onClick,label,color}: ActionButtonProps) => (
     <button onClick={onClick} className={`px-4 py-2 rounded mt-4 ${color}`}>
         {label}
     </button>

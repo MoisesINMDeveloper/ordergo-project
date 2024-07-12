@@ -1,5 +1,5 @@
 // PaymentModal.tsx
-import React,{useState} from 'react';
+import React,{useState,type ChangeEvent} from 'react';
 import {IoMdCopy} from 'react-icons/io';
 import data from '@/constant/data';
 import ActionButton from '../atoms/Dashboard/ActionButton';
@@ -11,11 +11,11 @@ interface PaymentModalProps {
     onClose: () => void;
 }
 
-const PaymentModal: React.FC<PaymentModalProps>=({total,onConfirm,onClose}) => {
+const PaymentModal: React.FC<PaymentModalProps>=({total,onConfirm,onClose}: PaymentModalProps) => {
     const {bank,code,cedula,phone}=data.paydates;
     const [referenceNumber,setReferenceNumber]=useState('');
 
-    const handleCopy=() => {
+    const handleCopy: () => void=(): void => {
         const textToCopy=`
             Banco: ${bank}
             Código: ${code}
@@ -41,12 +41,12 @@ const PaymentModal: React.FC<PaymentModalProps>=({total,onConfirm,onClose}) => {
                 <input
                     type="text"
                     value={referenceNumber}
-                    onChange={(e) => setReferenceNumber(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>): void => setReferenceNumber(e.target.value)}
                     placeholder="Numero de referencia"
                     className="w-full p-2 mt-4 mb-4 border rounded border-brown bg-transparent outline-none"
                 />
                 <div className="flex justify-center space-x-2">
-                    <ActionButton onClick={() => onConfirm(referenceNumber)} label="Confirmar" color="bg-green-500 active:bg-green text-white" />
+                    <ActionButton onClick={(): void => onConfirm(referenceNumber)} label="Confirmar" color="bg-green-500 active:bg-green text-white" />
                     <ActionButton onClick={onClose} label="Cancelar" color="bg-red-500 active:bg-red text-white" />
                 </div>
             </div>

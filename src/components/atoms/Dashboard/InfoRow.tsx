@@ -5,7 +5,7 @@ interface InfoRowProps {
     value: string;
 }
 
-const InfoRow: React.FC<InfoRowProps>=({label,value}) => (
+const InfoRow: React.FC<InfoRowProps>=({label,value}: InfoRowProps) => (
     <p className="mb-2 flex flex-row items-center justify-between">
         <strong>{label}:</strong> {value}
     </p>

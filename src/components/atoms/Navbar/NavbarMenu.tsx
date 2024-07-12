@@ -13,7 +13,7 @@ const MenuNavbar=({onClick}: {onClick: () => void}) => {
     };
 
     useEffect((): () => void => {
-        const handleClickOutside: (event: MouseEvent) => void=(event: MouseEvent) => {
+        const handleClickOutside: (event: MouseEvent) => void=(event: MouseEvent): void => {
             if(menuRef.current&&!menuRef.current.contains(event.target as Node)) {
                 setIsMenuOpen(false);
             }
