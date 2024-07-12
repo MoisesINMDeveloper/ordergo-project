@@ -18,7 +18,6 @@ const PaymentModal: React.FC<PaymentModalProps>=({total,onConfirm,onClose}) => {
     const handleCopy=() => {
         const textToCopy=`
             Banco: ${bank}
-            Código: ${code}
             DNI: ${cedula}
             Teléfono: ${phone}
             Monto: $${total.toFixed(2)}
