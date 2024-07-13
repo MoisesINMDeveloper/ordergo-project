@@ -160,7 +160,7 @@ const data: { categories: Category[]; paydates: PayDates } = {
         },
         {
           id: 2,
-          title: "Baso Coca Cola",
+          title: "Vaso Coca Cola",
           price: 0.5,
           images: ["/bebidas/basoCoca.jpg", "/bebidas/Coca-Cola2.jfif"],
           description:
