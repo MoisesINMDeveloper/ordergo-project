@@ -64,7 +64,7 @@ const data: { categories: Category[]; paydates: PayDates } = {
           id: 2,
           title: "Burguer Comb",
           price: 4.99,
-          images: ["/burger/Burgercomb.jpg"],
+          images: ["/burger/BurgerComb.jpg"],
           description:
             "Doble hamburguesa con racion de papas cuenta con Lechuga tomate cebolla pepinillos y carne de res.",
         },
